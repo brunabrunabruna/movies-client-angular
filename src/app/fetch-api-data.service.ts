@@ -27,6 +27,13 @@ export class FetchApiDataService {
   }
 
   //
+  public userLogin(username: string, password: string): Observable<any> {
+    return this.http
+      .post(apiUrl + 'login', { username, password })
+      .pipe(catchError(this.handleError));
+  }
+
+  //
   public getAllMovies(): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
