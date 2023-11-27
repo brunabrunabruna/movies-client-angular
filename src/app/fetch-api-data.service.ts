@@ -34,8 +34,22 @@ export class FetchApiDataService {
   }
 
   //
+  // public getAllMovies(): Observable<any> {
+  //   console.log('getallmovies called');
+  //   const token = localStorage.getItem('token');
+  //   console.log(token);
+  //   return this.http
+  //     .get<Response>(apiUrl + 'movies', {
+  //       headers: new HttpHeaders({
+  //         Authorization: 'Bearer ' + token,
+  //       }),
+  //     })
+  //     .pipe(map(this.extractResponseData), catchError(this.handleError));
+  // }
   public getAllMovies(): Observable<any> {
+    console.log('getallmovies called');
     const token = localStorage.getItem('token');
+    console.log('Token:', token); // Log the token value
     return this.http
       .get<Response>(apiUrl + 'movies', {
         headers: new HttpHeaders({
