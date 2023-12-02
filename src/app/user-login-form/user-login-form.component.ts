@@ -34,9 +34,8 @@ export class UserLoginFormComponent implements OnInit {
         (result) => {
           // console.log('result:', result);
           //TEST, STILL NEEDS CONFIRMATION THAT OT WORKS
-          localStorage.setItem('user', JSON.stringify(result.user.username));
-
-          localStorage.setItem('token', JSON.stringify(result.token));
+          localStorage.setItem('user', result.user.username);
+          localStorage.setItem('token', result.token);
           // console.log(result.user.username);
           // console.log(result.token);
           // Logic for a successful user registration goes here! (To be implemented)
