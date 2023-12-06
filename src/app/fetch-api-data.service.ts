@@ -47,6 +47,10 @@ export class FetchApiDataService {
   //     .pipe(map(this.extractResponseData), catchError(this.handleError));
   // }
   public getAllMovies(): Observable<any> {
+    if (typeof window === 'undefined') {
+      return new Observable<any>();
+    }
+
     console.log('getallmovies called');
     const token = localStorage.getItem('token');
     console.log('Token:', token); // Log the token value
@@ -125,17 +129,60 @@ export class FetchApiDataService {
   }
 
   //
-  public addFavMovie(username: string, favMovieId: string): Observable<any> {
+  public addFavMovie(favMovieId: string): Observable<any> {
     const token = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    user.favoriteMovies.push(favMovieId);
+    localStorage.setItem('user', JSON.stringify(user));
+    console.log('fetch api: add fav movies called');
+    console.log(favMovieId);
+    console.log(`Add Fav Token: ${token}`);
+    console.log(`Username: ${user.username}`);
+
     return this.http
-      .post<Response>(apiUrl + 'users/' + username + '/movies/' + favMovieId, {
-        headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
-        }),
-      })
+      .post<Response>(
+        apiUrl + 'users/' + user.username + '/movies/' + favMovieId,
+        {}
+      )
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
+  public deleteFavMovie(favMovieId: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+    const index = user.favoriteMovies.indexOf(favMovieId);
+    console.log('index:', index);
+
+    console.log(`Delete Fav Token: ${token}`);
+
+    if (index > -1) {
+      user.favoriteMovies.splice(index, 1);
+    }
+    localStorage.setItem('user', JSON.stringify(user));
+
+    return this.http
+      .delete<Response>(
+        apiUrl + 'users/' + user.username + '/movies/' + favMovieId,
+        {
+          headers: new HttpHeaders({
+            Authorization: 'Bearer ' + token,
+          }),
+        }
+      )
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
+  }
+
+  public isFavMovies(favMovieId: string): boolean {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    // const token = localStorage.getItem('token');
+    // return user.favoriteMovies.indeOf(favMovieId) >= 0;
+    if (user) {
+      return user.favoriteMovies.includes(favMovieId);
+    } else {
+      return false;
+    }
+  }
   // //
   // public editUser(updatedUser: any): Observable<any> {
   //   const token = localStorage.getItem('token');
@@ -179,19 +226,6 @@ export class FetchApiDataService {
   }
 
   //
-  public deleteFavMovie(username: string, favMovieId: string): Observable<any> {
-    const token = localStorage.getItem('token');
-    return this.http
-      .delete<Response>(
-        apiUrl + 'users/' + username + '/movies/' + favMovieId,
-        {
-          headers: new HttpHeaders({
-            Authorization: 'Bearer ' + token,
-          }),
-        }
-      )
-      .pipe(map(this.extractResponseData), catchError(this.handleError));
-  }
 
   // Non-typed response extraction
   private extractResponseData(res: Response): any {
@@ -205,7 +239,8 @@ export class FetchApiDataService {
       console.error('Some error occurred:', error.error.message);
     } else {
       console.error(
-        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
+        `Error Status code ${error.status}, ` +
+          `Error body is: ${JSON.stringify(error.error)}`
       );
     }
     return throwError(

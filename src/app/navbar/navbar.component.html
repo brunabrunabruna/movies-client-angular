@@ -1,14 +1,23 @@
 <div mat-toolbar>
-  <div mat-toolbar-row>
+  <div mat-toolbar-row class="navbar-items">
+    <!-- <div class="nav-item"> -->
     <a href="/movies">
-      <span>movies</span>
+      <span class="navbar-item">movies</span>
     </a>
+    <!-- </div> -->
+    <!-- <div> -->
     <a href="/profile">
-      <span>profile</span>
+      <span class="navbar-item">profile</span>
     </a>
+    <!-- </div> -->
 
     <!-- add logout function on click -->
-    <button mat-icon-button aria-label="logout">
+    <button
+      class="navbar-item"
+      mat-icon-button
+      aria-label="logout"
+      (click)="logoutUser()"
+    >
       <mat-icon>exit_to_app</mat-icon>
     </button>
   </div>

@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
+// This import is used to display notifications back to the user
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 type User = {
   _id?: string;
@@ -22,7 +24,8 @@ export class ProfilePageComponent implements OnInit {
 
   constructor(
     public fetchApiData: FetchApiDataService,
-    public router: Router
+    public router: Router,
+    public snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -55,6 +58,14 @@ export class ProfilePageComponent implements OnInit {
       console.log('result:', result);
 
       this.user = result;
+      this.snackBar.open('profile updated successfully', 'OK', {
+        duration: 2000,
+      });
     });
   }
+
+  // logoutUser(): void {
+  //   localStorage.clear();
+  //   console.log('logged out');
+  // }
 }

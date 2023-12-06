@@ -1,6 +1,7 @@
-<div mat-card>
-  <div mat-card-content>
-    <div mat-form-field>
+<div mat-card class="form-wrapper">
+  <div mat-card-content class="form">
+    <div mat-form-field class="form-item">
+      <legend>required field:</legend>
       <input
         [(ngModel)]="userData.username"
         matInput
@@ -10,7 +11,9 @@
         required
       />
     </div>
-    <div mat-form-field>
+
+    <div mat-form-field class="form-item">
+      <legend>required field:</legend>
       <input
         [(ngModel)]="userData.password"
         matInput
@@ -20,7 +23,9 @@
         required
       />
     </div>
-    <div mat-form-field>
+
+    <div mat-form-field class="form-item">
+      <legend>required field:</legend>
       <input
         [(ngModel)]="userData.email"
         matInput
@@ -30,6 +35,7 @@
         required
       />
     </div>
+
     <button mat-raised-button (click)="updateUser()" color="primary">
       submit
     </button>
