@@ -136,11 +136,29 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  //
-  public editUser(username: string, updatedUser: any): Observable<any> {
+  // //
+  // public editUser(updatedUser: any): Observable<any> {
+  //   const token = localStorage.getItem('token');
+  //   // const user = localStorage.getItem('user');
+  //   const user = JSON.parse(localStorage.getItem('user') || '{}');
+  //   console.log('editUser called');
+  //   console.log('user:', user);
+  //   return this.http
+  //     .put<Response>(apiUrl + 'users/' + user.username, updatedUser, {
+  //       headers: new HttpHeaders({
+  //         Authorization: 'Bearer ' + token,
+  //       }),
+  //     })
+  //     .pipe(map(this.extractResponseData), catchError(this.handleError));
+  // }
+
+  //test
+  editUser(updatedUser: any): Observable<any> {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+
     const token = localStorage.getItem('token');
     return this.http
-      .put<Response>(apiUrl + 'users/' + username, updatedUser, {
+      .put<Response>(apiUrl + 'users/' + user.username, updatedUser, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
