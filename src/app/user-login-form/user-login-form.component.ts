@@ -30,11 +30,12 @@ export class UserLoginFormComponent implements OnInit {
 
   // This is the function responsible for sending the form inputs to the backend
   loginUser(): void {
+    console.log('Login');
     this.fetchApiData
       .userLogin(this.userData.username, this.userData.password)
       .subscribe(
         (result) => {
-          // console.log('result:', result);
+          console.log('result:', JSON.stringify(result));
           //TEST, STILL NEEDS CONFIRMATION THAT OT WORKS
           localStorage.setItem('user', JSON.stringify(result.user));
           localStorage.setItem('token', result.token);

@@ -26,4 +26,10 @@ export class NavbarComponent {
     });
     this.router.navigate(['welcome']);
   }
+
+  isUserLoggedIn(): boolean {
+    const user = localStorage.getItem('user');
+    // Check if user is not null or undefined
+    return user !== null && user !== undefined;
+  }
 }

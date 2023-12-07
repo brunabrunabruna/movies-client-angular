@@ -7,6 +7,7 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Token } from '@angular/compiler';
 
 //Declaring the api url that will provide data for the client app
 const apiUrl = 'https://movies-api-render-0a0q.onrender.com/';
@@ -112,21 +113,6 @@ export class FetchApiDataService {
   }
 
   //
-  public getFavMovies(username: string): Observable<any> {
-    return this.getUser(username).pipe(
-      map((user) => user.favoriteMovies),
-      catchError(this.handleError)
-    );
-
-    // const token = localStorage.getItem('token');
-    // return this.http
-    //   .get<Response>(apiUrl + 'users/' + username + movieID, {
-    //     headers: new HttpHeaders({
-    //       Authorization: 'Bearer ' + token,
-    //     }),
-    //   })
-    //   .pipe(map(this.extractResponseData), catchError(this.handleError));
-  }
 
   //
   public addFavMovie(favMovieId: string): Observable<any> {
@@ -142,7 +128,12 @@ export class FetchApiDataService {
     return this.http
       .post<Response>(
         apiUrl + 'users/' + user.username + '/movies/' + favMovieId,
-        {}
+        {},
+        {
+          headers: new HttpHeaders({
+            Authorization: 'Bearer ' + token,
+          }),
+        }
       )
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }

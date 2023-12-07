@@ -1,3 +1,71 @@
-.card{
-    margin: 20px;
+mat-card-title{
+    font-weight: bold;
+    margin-bottom: 10px;
 }
+
+
+.card-wrapper{
+    display: grid;
+    // grid-template-columns: 1fr; /* One column */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    // height: 100vh; /* Adjust the height of the container as needed */
+
+}
+
+.heart-button{
+    color: red !important
+}
+.card{
+width: 300px;
+height: 500px;
+// max-height: 400px;
+margin: 30px;
+overflow: hidden;
+
+
+}
+
+.card > img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+
+}
+
+
+
+  @media  (min-width:700px){
+
+    .card-wrapper{
+        display: grid;
+    flex-direction: column;
+    // flex-wrap: wrap;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    
+    }
+  }
+
+  @media  (min-width:1300px){
+
+    .card-wrapper{
+        display: grid;
+    flex-direction: column;
+    // flex-wrap: wrap;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr
+    
+    }
+  }
+  @media  (min-width:1600px){
+
+    .card-wrapper{
+        display: grid;
+    flex-direction: column;
+    // flex-wrap: wrap;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr
+    
+    }
+  }

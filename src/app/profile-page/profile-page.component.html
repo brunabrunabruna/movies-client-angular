@@ -40,4 +40,19 @@
       submit
     </button>
   </div>
+  <div class="favMovies">
+    <p class="favMovies-title">{{ userData.username }}'s Favorite Movies</p>
+    <div *ngIf="favoriteMovies.length">
+      <div *ngFor="let favoriteMovie of favoriteMovies" class="favMovies-item">
+        {{ favoriteMovie.title }}
+        <button
+          (click)="removeFavoriteMovie(favoriteMovie._id)"
+          mat-raised-button
+          color="primary"
+        >
+          unfavorite
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
