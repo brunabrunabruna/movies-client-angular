@@ -48,11 +48,18 @@ export class ProfilePageComponent implements OnInit {
     };
   }
 
+  /**
+   *
+   * @returns user stored at local storage
+   */
   getUser(): User {
     return JSON.parse(localStorage.getItem('user') || '{}');
     // return JSON.parse('');
   }
 
+  /**
+   * updates user information
+   */
   updateUser(): void {
     this.fetchApiData.editUser(this.userData).subscribe((result) => {
       localStorage.setItem('user', JSON.stringify(result));
@@ -68,6 +75,9 @@ export class ProfilePageComponent implements OnInit {
     });
   }
 
+  /**
+   * gets a list of a users favorite movies
+   */
   getFavMovies(): void {
     // let favMovies;
 
@@ -81,6 +91,10 @@ export class ProfilePageComponent implements OnInit {
 
     // return favMovies;
   }
+  /**
+   * removes a movie from the users list of favorite movies
+   * @param favMovie
+   */
   removeFavoriteMovie(favMovie: string): void {
     this.fetchApiData.deleteFavMovie(favMovie).subscribe((movies) => {
       this.favoriteMovies = this.favoriteMovies.filter((movie: any) => {
