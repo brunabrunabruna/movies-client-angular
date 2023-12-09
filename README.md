@@ -1,4 +1,44 @@
-# MoviesClientAngular
+# Ghibli Archive - Angular Version
+
+## Project Description
+
+Frontend was rewritten from React to Angular, using Typescript.
+Ghibli archive is a website about the most iconic movies made by Studio Ghibli. Users can signup, discover more details about Ghibli movies, and make a list of their favorite movies.
+
+![app-screenshot](.//src/assets/screenshot1.png)
+
+## My Role
+
+- Rewrite the frontend of my movies app with Angular framework (Typescript)
+- Connect frontend with backend endpoints
+- Style website with Angular Material
+
+## Features
+
+- Signup / Login pages
+- List of Studio Ghibli Movies ([fetched from my own API](https://github.com/brunabrunabruna/movies-api))
+- Movie details view.
+- Profile view, where users can
+  - update their information,
+  - see their favorite movies list,
+
+## Project Link
+
+link to app's repository:
+https://github.com/brunabrunabruna/movies-client-angular
+
+link to live app:
+https://brunabrunabruna.github.io/movies-client-angular/
+
+## Project Dependencies
+
+- Angular
+- Angular Material
+- Typescript
+- Typedoc
+- see package.json for more details
+
+## MoviesClientAngular
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.3.
 
